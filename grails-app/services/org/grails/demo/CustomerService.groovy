@@ -11,15 +11,15 @@ import javax.xml.ws.ResponseWrapper
 class CustomerService {
 
     @WebMethod(operationName = "getCustomers")
-    @WebResult(name = "customer")
+    @WebResult(name = "customers")
     @ResponseWrapper(
             localName = "GetCustomersResponse",
             targetNamespace = "http://demo.grails.org",
             className = "org.grails.demo.customer.GetCustomersResponse"
     )
-    List<CustomerDTO> getCustomer() {
+    CustomerDTOs getCustomers() {
         Thread.sleep(5000) //Simulate latency
-        Customer.list().collect { new CustomerDTO(firstName: it.firstName, lastName: it.lastName, username: it.username, id: it.id) }
+        new CustomerDTOs(customers: Customer.list().collect { new CustomerDTO(firstName: it.firstName, lastName: it.lastName, username: it.username, id: it.id) })
     }
 
     @WebMethod(operationName = "getCustomer")
