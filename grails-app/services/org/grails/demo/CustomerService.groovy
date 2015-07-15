@@ -29,15 +29,15 @@ class CustomerService {
             targetNamespace = "http://demo.grails.org",
             className = "org.grails.demo.customer.GetCustomerResponse"
     )
-    Customer getCustomer(@WebParam(name = 'customerId') int customerId) {
+    Customer getCustomer(@WebParam(name = 'ID') int id) {
         Thread.sleep(5000)  //Simulate latency
-        loadCustomer(customerId)
+        loadCustomer(id)
     }
 
-    public Customer loadCustomer(int customerId) {
+    public Customer loadCustomer(int id) {
         Customer customer = null
         try {
-            customer = Customer.read(customerId) ?: new Customer(id: customerId)
+            customer = Customer.read(id) ?: new Customer(id: id)
         } catch (Exception exception) {
             log.error(exception.getMessage(), exception)
         }
@@ -52,9 +52,9 @@ class CustomerService {
             className = "org.grails.demo.customer.MakePaymentResponse"
     )
     Customer makePayment(
-            @WebParam(name = 'customerId') int customerId,
-            @WebParam(name = 'paymentDate') Date paymentDate,
-            @WebParam(name = 'paymentAmount') Double paymentAmount
+            @WebParam(name = 'ID') int customerId,
+            @WebParam(name = 'PaymentDate') Date paymentDate,
+            @WebParam(name = 'PaymentAmount') Double paymentAmount
     ) {
         Customer customer = loadCustomer(customerId)
         Payment payment = new Payment(date: paymentDate, amount: paymentAmount).save()
