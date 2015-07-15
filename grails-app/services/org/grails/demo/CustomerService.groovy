@@ -57,7 +57,7 @@ class CustomerService {
             @WebParam(name = 'PaymentAmount') Double paymentAmount
     ) {
         Customer customer = loadCustomer(customerId)
-        Payment payment = new Payment(date: paymentDate, amount: paymentAmount).save()
+        Payment payment = new Payment(paymentDate: paymentDate, paymentAmount: paymentAmount).save()
         customer.addToPayments(payment).save()
         customer
     }

@@ -8,13 +8,13 @@ import javax.xml.bind.annotation.XmlElement
 @XmlAccessorType(XmlAccessType.NONE)
 class Payment {
 
-    @XmlElement(name='Date')
-    Date date
-    @XmlElement(name='Amount')
-    Double amount
+    @XmlElement(name='PaymentDate')
+    Date paymentDate
+    @XmlElement(name='PaymentAmount')
+    Double paymentAmount
 
     static constraints = {
-        date()
-        amount()
+        paymentDate()
+        paymentAmount()
     }
 }
