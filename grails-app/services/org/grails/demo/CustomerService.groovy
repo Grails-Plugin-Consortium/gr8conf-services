@@ -30,7 +30,7 @@ class CustomerService {
             className = "org.grails.demo.customer.GetCustomerResponse"
     )
     Customer getCustomer(
-            @WebParam(name = 'CustomerID') int customerId,
+            @WebParam(name = 'CustomerId') int customerId,
             @WebParam(name = 'FirstName') String firstName
     ) {
         Thread.sleep(5000)  //Simulate latency
@@ -43,7 +43,7 @@ class CustomerService {
             if(firstName) {
                 customer = Customer.findByIdAndFirstName(id, firstName) ?: new Customer(id: id)
             } else {
-                customer = Customer.load(id) ?: new Customer(id: id)
+                customer = Customer.get(id) ?: new Customer(id: id)
             }
         } catch (Exception exception) {
             log.error(exception.getMessage(), exception)
@@ -59,7 +59,7 @@ class CustomerService {
             className = "org.grails.demo.customer.MakePaymentResponse"
     )
     Customer makePayment(
-            @WebParam(name = 'CustomerID') int customerId,
+            @WebParam(name = 'CustomerId') int customerId,
             @WebParam(name = 'PaymentDate') Date paymentDate,
             @WebParam(name = 'PaymentAmount') Double paymentAmount
     ) {

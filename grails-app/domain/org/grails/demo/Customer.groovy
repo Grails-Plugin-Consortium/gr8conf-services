@@ -13,7 +13,7 @@ class Customer implements Serializable {
 
     static hasMany = [payments: Payment]
 
-    @XmlElement(name='CustomerID')
+    @XmlElement(name='CustomerId')
     Long id
     @XmlElement(name='FirstName')
     String firstName
